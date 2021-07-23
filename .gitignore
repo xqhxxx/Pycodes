@@ -1,0 +1,19 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/$CACHE_FILE$
+.idea/$PRODUCT_WORKSPACE_FILE$
+.idea/.gitignore
+.idea/dictionaries
+.idea/encodings.xml
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/myProject.iml
+.idea/vcs.xml
+pro0714/multi-scale_detection/.idea/inspectionProfiles/
+pro0714/multi-scale_detection/__pycache__/
+pro0714/multi-scale_detection/nets/__pycache__/
+pro0714/multi-scale_detection/utils/__pycache__/
+pro0714/v0.1/__pycache__/
+pro0714/v0.1/tools/__pycache__/
+/pro0714/.idea/
+!/pro0714/.idea/
