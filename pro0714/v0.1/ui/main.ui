@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>954</width>
+    <width>936</width>
     <height>665</height>
    </rect>
   </property>
@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="page_1">
      <widget class="QWidget" name="login_widget" native="true">
@@ -625,6 +625,44 @@ font: 10pt &quot;新宋体&quot;;</string>
       </widget>
      </widget>
     </widget>
+    <widget class="QWidget" name="page_4">
+     <widget class="QWidget" name="image_widget" native="true">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>671</width>
+        <height>571</height>
+       </rect>
+      </property>
+      <widget class="QPushButton" name="btn1">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>80</y>
+         <width>93</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>btn1</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="login_Button_2">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>80</y>
+         <width>93</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>btn2</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -633,7 +671,7 @@ font: 10pt &quot;新宋体&quot;;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>954</width>
+     <width>936</width>
      <height>26</height>
     </rect>
    </property>
@@ -647,6 +685,8 @@ font: 10pt &quot;新宋体&quot;;</string>
     <addaction name="action_jc"/>
     <addaction name="separator"/>
     <addaction name="action_data"/>
+    <addaction name="separator"/>
+    <addaction name="action_image_test"/>
    </widget>
    <addaction name="menu"/>
   </widget>
@@ -661,6 +701,11 @@ font: 10pt &quot;新宋体&quot;;</string>
   <action name="action_jc">
    <property name="text">
     <string>在线监测</string>
+   </property>
+  </action>
+  <action name="action_image_test">
+   <property name="text">
+    <string>图片测试</string>
    </property>
   </action>
  </widget>

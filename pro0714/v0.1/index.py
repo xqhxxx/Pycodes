@@ -22,16 +22,12 @@ class MainApp(QMainWindow, ui):
         self.setupUi(self)
         # 默认显示登录 隐藏主界面
         self.handle_ui_init()
-
-        #
+        #menu action
         self.handle_menus()
-
 
     # todo UI的初始化
     def handle_ui_init(self):
-        # self.show_themes(self.login_widget)
-        # self.hide_themes(self.main_widget)
-        # self.hide_themes(self.data_widget)
+        # login ui
         self.stackedWidget.setCurrentIndex(0)
         self.hide_themes(self.menu_Bar)
 
@@ -48,17 +44,17 @@ class MainApp(QMainWindow, ui):
 
     # todo 界面切换
     def handle_menus(self):
-        # pass
         # todo 1 登录
         self.login_Button.clicked.connect(self.on_login)
         # todo 2 监测主界面
-        # 2.1 回到监测界面
         self.action_jc.triggered.connect(self.monitor_management)
-
         # todo 3 数据管理
         self.action_data.triggered.connect(self.data_management)
+        # todo 4 图片识别界面
+        self.action_image_test.triggered.connect(self.image_management)
 
-    # 监测界面
+
+    # 2监测界面
     def monitor_management(self):
         # self.hide_themes(self.data_widget)
         # self.show_themes(self.main_widget)
@@ -67,7 +63,7 @@ class MainApp(QMainWindow, ui):
         # 保存数据
         self.save_data_button.clicked.connect(self.save_data)
 
-    # 处理数据 保存
+    # 2.1处理数据 保存
     def save_data(self):
         # 测试数据
         v1 = time.asctime(time.localtime(time.time()))
@@ -78,6 +74,7 @@ class MainApp(QMainWindow, ui):
         sqlTools.updateData(self, sql)
         print("save data true" )
 
+    # 1 login
     def on_login(self):
         flag = False
         # 登录确认 ok 切换界面
@@ -98,13 +95,13 @@ class MainApp(QMainWindow, ui):
             self.laber_err.setText(str("用户名或密码错误，请重试"))
             self.pass_input.setText('')
 
-    # 数据管理界面
+    # 3 数据管理界面
     def data_management(self):
         # self.hide_themes(self.main_widget)
         # self.show_themes(self.data_widget)
         self.stackedWidget.setCurrentIndex(2)
 
-        # 1 数据初始化显示
+        # 3.1 数据初始化显示
         res = sqlTools.queryData(self, "select data_name,attribute_01,attribute_02,attribute_03 from data_tb;")
         print(res)
 
@@ -116,10 +113,10 @@ class MainApp(QMainWindow, ui):
                 self.table_data.setItem(rowIndex, colIndex, QTableWidgetItem(l))
                 colIndex += 1
             rowIndex += 1
-        #   2  数据导出
+        # 3.2  数据导出
         self.export_data_button.clicked.connect(self.export_data)
 
-    #   导出数据
+    # 3.2 导出数据
     def export_data(self):
         # 准备数据  文件选择
         today_date = datetime.today().date()
@@ -147,6 +144,11 @@ class MainApp(QMainWindow, ui):
             workbook.save(filename)
             print('文件已保存至%s' % filename)
 
+    # 4 图片测试
+    def image_management(self):
+
+
+        pass
 
     #  界面显示
     def show_themes(self, _widget):
