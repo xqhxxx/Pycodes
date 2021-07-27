@@ -2,7 +2,10 @@ from datetime import datetime
 import os
 import time
 import xlwt
+from PIL import Image
+import numpy as np
 from PyQt5.QtCore import QTimer, QDateTime
+from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QFileDialog
 
 # 3步骤3
@@ -29,7 +32,7 @@ class MainApp(QMainWindow, ui):
     def handle_ui_init(self):
         # login ui
         self.stackedWidget.setCurrentIndex(0)
-        self.hide_themes(self.menu_Bar)
+        # self.hide_themes(self.menu_Bar)方便调试
 
         # 动态显示时间在label上
         timer = QTimer(self)
@@ -53,11 +56,8 @@ class MainApp(QMainWindow, ui):
         # todo 4 图片识别界面
         self.action_image_test.triggered.connect(self.image_management)
 
-
     # 2监测界面
     def monitor_management(self):
-        # self.hide_themes(self.data_widget)
-        # self.show_themes(self.main_widget)
         self.stackedWidget.setCurrentIndex(1)
 
         # 保存数据
@@ -97,8 +97,6 @@ class MainApp(QMainWindow, ui):
 
     # 3 数据管理界面
     def data_management(self):
-        # self.hide_themes(self.main_widget)
-        # self.show_themes(self.data_widget)
         self.stackedWidget.setCurrentIndex(2)
 
         # 3.1 数据初始化显示
@@ -146,9 +144,47 @@ class MainApp(QMainWindow, ui):
 
     # 4 图片测试
     def image_management(self):
+        self.stackedWidget.setCurrentIndex(3)
+
+        self.load_modal.pressed.connect(self.load_model)
+        # 4.2
+        self.start_jc.pressed.connect(self.select_image)
+        self.label_image
+        self.label_image_result
 
 
         pass
+    # 4.1 加载模型
+    def load_model(self):
+        print("停止检测")
+        # self.yolo = YOLO()
+        self.load_modal.setText('模型加载完成')
+        self.load_modal.setStyleSheet("QPushButton{color:rgb(255, 0, 0, 255);}")
+
+    # 4.2选择图片 开始检测
+    def select_image(self):
+        print("开始检测")
+        self.openfile_name_image, _ = QFileDialog.getOpenFileName(self, "选择照片文件", r"./img/")
+        print(str(self.openfile_name_image)[-3:])
+        if self.openfile_name_image[-3:] == 'jpg':
+
+            self.label_image.setPixmap(QPixmap(str(self.openfile_name_image)).scaled(600, 500))
+
+            img = Image.open(str(self.openfile_name_image))
+            img = img.resize((800, 600))
+            img = img.convert("RGB")
+
+            img = self.yolo.detect_image(img)
+            img = np.array(self.yolo.detect_image(img))
+            image = QImage(img[:], img.shape[1], img.shape[0], img.shape[1] * 3,
+                           QImage.Format_RGB888)  # pyqt5转换成自己能放的图片格式
+            jpg_out = QPixmap(image).scaled(600, 500)  # 设置图片大小
+            self.label_image_result.setPixmap(jpg_out)
+        else:
+            self.select_image()
+        # cv_img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+        # cv2.imshow("video", cv_img)
+        # cv2.waitKey(0)
 
     #  界面显示
     def show_themes(self, _widget):
