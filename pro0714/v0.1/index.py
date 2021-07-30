@@ -13,6 +13,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QFileDi
 from PyQt5.uic import loadUiType
 
 from tools import sqlTools
+from multi_scale.yolo import YOLO
 
 ui, _ = loadUiType("ui/main.ui")
 
@@ -149,22 +150,22 @@ class MainApp(QMainWindow, ui):
         self.load_modal.pressed.connect(self.load_model)
         # 4.2
         self.start_jc.pressed.connect(self.select_image)
-        self.label_image
-        self.label_image_result
+        # self.label_image
+        # self.label_image_result
 
 
         pass
     # 4.1 加载模型
     def load_model(self):
-        print("停止检测")
-        # self.yolo = YOLO()
+        # print("停止检测")
+        self.yolo = YOLO()
         self.load_modal.setText('模型加载完成')
         self.load_modal.setStyleSheet("QPushButton{color:rgb(255, 0, 0, 255);}")
 
     # 4.2选择图片 开始检测
     def select_image(self):
         print("开始检测")
-        self.openfile_name_image, _ = QFileDialog.getOpenFileName(self, "选择照片文件", r"./img/")
+        self.openfile_name_image, _ = QFileDialog.getOpenFileName(self, "选择照片文件", r"./multi_scale/img/")
         print(str(self.openfile_name_image)[-3:])
         if self.openfile_name_image[-3:] == 'jpg':
 
