@@ -148,11 +148,10 @@ class MainApp(QMainWindow, ui):
         self.stackedWidget.setCurrentIndex(3)
 
         self.load_modal.pressed.connect(self.load_model)
-        # 4.2
+        # 4.2 选择图片 开始检测
         self.start_jc.pressed.connect(self.select_image)
         # self.label_image
         # self.label_image_result
-
 
         pass
     # 4.1 加载模型
@@ -183,9 +182,7 @@ class MainApp(QMainWindow, ui):
             self.label_image_result.setPixmap(jpg_out)
         else:
             self.select_image()
-        # cv_img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-        # cv2.imshow("video", cv_img)
-        # cv2.waitKey(0)
+
 
     #  界面显示
     def show_themes(self, _widget):
