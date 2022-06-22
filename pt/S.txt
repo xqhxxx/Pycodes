@@ -1,0 +1,11 @@
+
+opencv-python==3.4.2.16
+
+numpy
+
+pandas
+
+matplotlib
+
+图像处理 后面三个是数据分析与可视化
+
